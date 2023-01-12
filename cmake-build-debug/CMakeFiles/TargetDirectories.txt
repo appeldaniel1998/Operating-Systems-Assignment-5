@@ -1,0 +1,3 @@
+/home/appeldaniel/CLionProjects/assignment5/cmake-build-debug/CMakeFiles/assignment5.dir
+/home/appeldaniel/CLionProjects/assignment5/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/appeldaniel/CLionProjects/assignment5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
