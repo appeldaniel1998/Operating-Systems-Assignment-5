@@ -49,14 +49,26 @@ cmake_ninja_workdir = /home/appeldaniel/CLionProjects/assignment5/cmake-build-de
 
 build cmake_object_order_depends_target_assignment5: phony || CMakeFiles/assignment5.dir
 
-build CMakeFiles/assignment5.dir/SafeQueue.cpp.o: CXX_COMPILER__assignment5_Debug /home/appeldaniel/CLionProjects/assignment5/SafeQueue.cpp || cmake_object_order_depends_target_assignment5
-  DEP_FILE = CMakeFiles/assignment5.dir/SafeQueue.cpp.o.d
+build CMakeFiles/assignment5.dir/ActiveObject.cpp.o: CXX_COMPILER__assignment5_Debug /home/appeldaniel/CLionProjects/assignment5/ActiveObject.cpp || cmake_object_order_depends_target_assignment5
+  DEP_FILE = CMakeFiles/assignment5.dir/ActiveObject.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/assignment5.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment5.dir
 
-build CMakeFiles/assignment5.dir/ActiveObject.cpp.o: CXX_COMPILER__assignment5_Debug /home/appeldaniel/CLionProjects/assignment5/ActiveObject.cpp || cmake_object_order_depends_target_assignment5
-  DEP_FILE = CMakeFiles/assignment5.dir/ActiveObject.cpp.o.d
+build CMakeFiles/assignment5.dir/Pipeline.cpp.o: CXX_COMPILER__assignment5_Debug /home/appeldaniel/CLionProjects/assignment5/Pipeline.cpp || cmake_object_order_depends_target_assignment5
+  DEP_FILE = CMakeFiles/assignment5.dir/Pipeline.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/assignment5.dir
+  OBJECT_FILE_DIR = CMakeFiles/assignment5.dir
+
+build CMakeFiles/assignment5.dir/Reactor.cpp.o: CXX_COMPILER__assignment5_Debug /home/appeldaniel/CLionProjects/assignment5/Reactor.cpp || cmake_object_order_depends_target_assignment5
+  DEP_FILE = CMakeFiles/assignment5.dir/Reactor.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/assignment5.dir
+  OBJECT_FILE_DIR = CMakeFiles/assignment5.dir
+
+build CMakeFiles/assignment5.dir/main.cpp.o: CXX_COMPILER__assignment5_Debug /home/appeldaniel/CLionProjects/assignment5/main.cpp || cmake_object_order_depends_target_assignment5
+  DEP_FILE = CMakeFiles/assignment5.dir/main.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/assignment5.dir
   OBJECT_FILE_DIR = CMakeFiles/assignment5.dir
@@ -69,7 +81,7 @@ build CMakeFiles/assignment5.dir/ActiveObject.cpp.o: CXX_COMPILER__assignment5_D
 #############################################
 # Link the executable assignment5
 
-build assignment5: CXX_EXECUTABLE_LINKER__assignment5_Debug CMakeFiles/assignment5.dir/SafeQueue.cpp.o CMakeFiles/assignment5.dir/ActiveObject.cpp.o
+build assignment5: CXX_EXECUTABLE_LINKER__assignment5_Debug CMakeFiles/assignment5.dir/ActiveObject.cpp.o CMakeFiles/assignment5.dir/Pipeline.cpp.o CMakeFiles/assignment5.dir/Reactor.cpp.o CMakeFiles/assignment5.dir/main.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/assignment5.dir
   POST_BUILD = :

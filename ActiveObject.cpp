@@ -1,14 +1,14 @@
-//
-// Created by appeldaniel on 1/12/23.
-//
 
 #include "ActiveObject.h"
 
 void ActiveObject::run() {
     while (running_) {
-        if (task_queue_.size() != 0) {
+        try {
             auto task = task_queue_.pop();
             task();
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
         }
     }
 }

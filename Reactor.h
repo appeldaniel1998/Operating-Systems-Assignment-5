@@ -7,29 +7,43 @@
 
 #include <iostream>
 #include <string>
-#include <cstring>
+#include <thread>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-using namespace std;
+#include <cstring>
+#include "Pipeline.h"
 
-class Reactor {
+class TCPServer {
 private:
-    int maxConnections;
-    int buffSize;
-    int sockfd;
-    int newsockfd;
-    socklen_t clilen;
-    struct sockaddr_in serv_addr;
-    struct sockaddr_in cli_addr;
-    bool stopFlag = true;
+    void HandleConnection();
+
+    bool running_;
+    int sockfd_;
+    struct sockaddr_in serv_addr_;
+    std::thread thread_;
+    int kMaxConnections;
+    int kBufferSize;
+    Pipeline pipeline;
+
+    TCPServer(const TCPServer &) = delete;
+    TCPServer &operator=(const TCPServer &) = delete;
 
 public:
-    Reactor(int maxConnections, int buffSize);
-    void start();
-    void stop();
+    TCPServer(int max_connections = 10, int buffer_size = 1024)
+    {
+        running_ = false;
+        kMaxConnections = max_connections;
+        kBufferSize = buffer_size;
+    }
+    ~TCPServer() {
+        Stop();
+    }
+    bool Start(int port);
+    void Stop();
+
 };
 
 

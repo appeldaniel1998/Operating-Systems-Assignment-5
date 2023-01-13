@@ -9,6 +9,7 @@
 #include <thread>
 #include <atomic>
 #include <functional>
+#include <iostream>
 #include "SafeQueue.h"
 
 using namespace std;
