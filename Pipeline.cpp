@@ -6,14 +6,20 @@ string normalizeStringResult;
 string checkPalindromeResult;
 
 string removeSpecialChars(string input) {
-    input.erase(remove_if(input.begin(), input.end(), ::ispunct), input.end());
+    for (int i = 0; i < input.length(); i++) {
+        if (input[i] == '\n' || input[i] == '\r' || input[i] == '\t' || input[i] == '\v' || input[i] == '\f' ||
+        input[i] == '\a' || input[i] == '\b' || input[i] == '\'' || input[i] == '\"' || input[i] == '\?' || input[i] == '\\') {
+            input.erase(i, 1);
+            i--;
+        }
+    }
     return input;
 }
 
-string normalizeString(string input) {
-    transform(input.begin(), input.end(), input.begin(), ::toupper);
-    replace_if(input.begin(), input.end(), ::ispunct, ' ');
-    return input;
+string normalizeString() {
+    transform(resultRemoveSpecialChars.begin(), resultRemoveSpecialChars.end(), resultRemoveSpecialChars.begin(), ::toupper); //to upper case
+    replace_if(resultRemoveSpecialChars.begin(), resultRemoveSpecialChars.end(), ::ispunct, ' ');
+    return resultRemoveSpecialChars;
 }
 
 string checkPalindrome() {
