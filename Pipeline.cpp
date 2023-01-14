@@ -1,5 +1,10 @@
 
 #include "Pipeline.h"
+
+string resultRemoveSpecialChars;
+string normalizeStringResult;
+string checkPalindromeResult;
+
 string removeSpecialChars(string input) {
     input.erase(remove_if(input.begin(), input.end(), ::ispunct), input.end());
     return input;
@@ -11,14 +16,14 @@ string normalizeString(string input) {
     return input;
 }
 
-string checkPalindrome(string input) {
-    string reversed(input.rbegin(), input.rend());
-    return input == reversed ? "YES" : "NO";
+string checkPalindrome() {
+    string reversed(normalizeStringResult.rbegin(), normalizeStringResult.rend());
+    return normalizeStringResult == reversed ? "YES" : "NO";
 }
 
-void printResult(string input, string palindrome_result) {
+void printResult(string input) {
     cout << "original: " << input << endl;
-    cout << "polyndrom: " << palindrome_result << endl;
+    cout << "polyndrom: " << checkPalindromeResult << endl;
 }
 
 Pipeline::Pipeline() {
@@ -30,13 +35,13 @@ Pipeline::Pipeline() {
 
 void Pipeline::addString(const string& userInput) {
     this->removeSpecialCharsActiveObject.AddTask([&]() {
-        string resultRemoveSpecialChars = removeSpecialChars(userInput);
+        resultRemoveSpecialChars = removeSpecialChars(userInput);
         this->normalizeStringActiveObject.AddTask([&]() {
-            string normalizeStringResult = normalizeString(resultRemoveSpecialChars);
+            normalizeStringResult = normalizeString();
             this->checkPalindromeActiveObject.AddTask([&]() {
-                string checkPalindromeResult = checkPalindrome(normalizeStringResult);
+                checkPalindromeResult = checkPalindrome();
                 this->printResultActiveObject.AddTask([&]() {
-                    printResult(userInput, checkPalindromeResult);
+                    printResult(userInput);
                 });
             });
         });
