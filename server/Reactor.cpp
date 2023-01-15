@@ -11,36 +11,38 @@ void TCPServer::HandleConnection() {
     running_ = true;
     cout << "Listening..." << endl;
 
-    clilen = sizeof(cli_addr);
-    newsockfd = accept(sockfd_, (struct sockaddr *) &cli_addr, &clilen);
-    if (newsockfd < 0) {
-        std::cerr << "Error on accept" << std::endl;
-        exit(1);
-    }
-
-    // Print out client IP and port
-    char client_ip[INET_ADDRSTRLEN];
-    inet_ntop(AF_INET, &(cli_addr.sin_addr), client_ip, INET_ADDRSTRLEN);
-    std::cout << "Incoming connection from " << client_ip << ":" << ntohs(cli_addr.sin_port) << std::endl;
-
-    while (running_) {
-        // Read data from the client
-        char buffer[kBufferSize];
-        int n = read(newsockfd, buffer, kBufferSize - 1);
-        if (n < 0) {
-            std::cerr << "Error reading from socket" << std::endl;
-            continue;
+    while (true) {
+        clilen = sizeof(cli_addr);
+        newsockfd = accept(sockfd_, (struct sockaddr *) &cli_addr, &clilen);
+        if (newsockfd < 0) {
+            std::cerr << "Error on accept" << std::endl;
+            exit(1);
         }
-        buffer[n] = '\0';
-        std::cout << "Received message: " << buffer << std::endl;
-        string buffStr = buffer;
-        if (buffStr == "goodbye") {
-            break;
+
+        // Print out client IP and port
+        char client_ip[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &(cli_addr.sin_addr), client_ip, INET_ADDRSTRLEN);
+        std::cout << "Incoming connection from " << client_ip << ":" << ntohs(cli_addr.sin_port) << std::endl;
+
+        while (running_) {
+            // Read data from the client
+            char buffer[kBufferSize];
+            int n = read(newsockfd, buffer, kBufferSize - 1);
+            if (n < 0) {
+                std::cerr << "Error reading from socket" << std::endl;
+                continue;
+            }
+            buffer[n] = '\0';
+            std::cout << "Received message: " << buffer << std::endl;
+            string buffStr = buffer;
+            if (buffStr == "goodbye") {
+                break;
+            }
+            pipeline.addString(buffer);
         }
-        pipeline.addString(buffer);
+        cout << "Server has finished with current client!" << endl;
+        close(newsockfd);
     }
-    cout << "Server has finished!" << endl;
-    close(newsockfd);
 }
 
 bool TCPServer::Start(int port) {

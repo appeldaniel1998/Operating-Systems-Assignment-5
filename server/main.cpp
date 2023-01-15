@@ -1,5 +1,4 @@
 #include <iostream>
-#include "ActiveObject.h"
 #include "Reactor.h"
 
 using namespace std;
